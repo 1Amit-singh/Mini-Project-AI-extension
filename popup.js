@@ -1,4 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
+  chrome.runtime.onMessage.addListener(function (
+    message,
+    sender,
+    sendResponse
+  ) {
+    // Check if the message contains the data you're expecting
+    if (message.data) {
+      // Access the exported object
+      const user = message.data;
+
+      // Now you can use myObject in your popup.js
+      console.log("Popjs : ", user);
+    }
+  });
+
   document.getElementById("sendButton").addEventListener("click", function () {
     console.log("clicked");
     var userInput = document.getElementById("userInput").value;
@@ -8,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          "Bearer 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",
+          "Bearer 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",
       },
       body: JSON.stringify({
         messages: [{ role: "system", content: userInput }],
